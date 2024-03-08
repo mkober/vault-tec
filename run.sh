@@ -19,7 +19,9 @@ shopt -s dotglob
 cd "$VAULT_PATH"
 
 for file in *; do
-  ansible-vault $1 "$file" --vault-password-file ~/.ansible/pass.txt
+  if [ -f "$file" ]; then
+    ansible-vault $1 "$file" --vault-password-file ~/.ansible/pass.txt
+  fi
 done
 
 shopt -u dotglob
